@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Conversion Climb - Kuasai Awareness Ladder</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        midnight: '#191970',
+                        midnightDeep: '#0f0f4a',
+                        midnightLight: '#2d2d9a',
+                        accent: '#d4af37',
+                        accentLight: '#f4d03f',
+                        surface: '#12121a',
+                        surfaceLight: '#1a1a2e',
+                        muted: '#9ca3af',
+                        subtle: '#6b7280'
+                    },
+                    fontFamily: {
+                        display: ['Playfair Display', 'serif'],
+                        body: ['DM Sans', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        :root {
+            --bg: #0a0a12;
+            --fg: #f8fafc;
+            --muted: #94a3b8;
+            --accent: #d4af37;
+            --card: #12121a;
+            --border: #1e1e2e;
+            --midnight: #191970;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background-color: #0a0a12 !important;
+            color: var(--fg);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: 
+                radial-gradient(ellipse 80% 50% at 50% -20%, rgba(25, 25, 112, 0.4) 0%, transparent 50%),
+                radial-gradient(ellipse 60% 40% at 80% 60%, rgba(212, 175, 55, 0.08) 0%, transparent 40%),
+                radial-gradient(ellipse 50% 30% at 20% 80%, rgba(25, 25, 112, 0.2) 0%, transparent 40%);
+            z-index: 0;
+        }
+
+        /* Floating Particles */
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(212, 175, 55, 0.4);
+            border-radius: 50%;
+            animation: float 15s infinite ease-in-out;
+            pointer-events: none;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); opacity: 0.3; }
+            25% { transform: translateY(-30px) translateX(10px); opacity: 0.6; }
+            50% { transform: translateY(-15px) translateX(-10px); opacity: 0.4; }
+            75% { transform: translateY(-40px) translateX(5px); opacity: 0.5; }
+        }
+
+        /* Grid Pattern Overlay */
+        .grid-pattern {
+            position: absolute;
+            inset: 0;
+            background-image: 
+                linear-gradient(rgba(25, 25, 112, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(25, 25, 112, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Section Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
+                        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
+
+        /* Button Styles */
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent) 0%, #c9a227 100%);
+            color: #0a0a12 !important;
+            font-weight: 600;
+            padding: 1rem 2.5rem;
+            border-radius: 8px;
+            text-decoration: none !important;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, #f4d03f 0%, #d4af37 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(212, 175, 55, 0.4);
+        }
+
+        .btn-primary:hover::before {
+            opacity: 1;
+        }
+
+        .btn-primary span {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Card Hover Effects */
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            background: linear-gradient(145deg, #12121a 0%, #0f0f15 100%);
+            border: 1px solid var(--border);
+        }
+
+        .card-hover:hover {
+            transform: translateY(-4px);
+            border-color: rgba(212, 175, 55, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Ladder Step Animation */
+        .ladder-step {
+            position: relative;
+            padding-left: 3rem;
+        }
+
+        .ladder-step::before {
+            content: '';
+            position: absolute;
+            left: 0.75rem;
+            top: 3rem;
+            bottom: -2rem;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--accent), transparent);
+        }
+
+        .ladder-step:last-child::before {
+            display: none;
+        }
+
+        .step-number {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 1.75rem;
+            height: 1.75rem;
+            background: linear-gradient(135deg, var(--accent) 0%, #c9a227 100%);
+            color: #0a0a12;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.875rem;
+        }
+
+        /* FAQ Accordion */
+        .faq-item {
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            border-color: rgba(212, 175, 55, 0.2);
+        }
+
+        .faq-question {
+            padding: 1.25rem 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(145deg, #14141c 0%, #0f0f15 100%);
+            transition: background 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: linear-gradient(145deg, #1a1a24 0%, #14141c 100%);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            background: rgba(10, 10, 18, 0.5);
+        }
+
+        .faq-answer.active {
+            max-height: 300px;
+        }
+
+        .faq-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .faq-icon.rotate {
+            transform: rotate(180deg);
+        }
+
+        /* Pricing Card */
+        .pricing-card {
+            background: linear-gradient(145deg, #14141c 0%, #0f0f15 100%);
+            border: 2px solid var(--border);
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent), #c9a227, var(--accent));
+        }
+
+        /* Glow Effect */
+        .glow-accent {
+            box-shadow: 0 0 60px rgba(212, 175, 55, 0.15);
+        }
+
+        /* Testimonial Card */
+        .testimonial-card {
+            background: linear-gradient(145deg, #14141c 0%, #0f0f15 100%);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            font-family: 'Playfair Display', serif;
+            font-size: 6rem;
+            color: rgba(212, 175, 55, 0.1);
+            position: absolute;
+            top: 0;
+            left: 1rem;
+            line-height: 1;
+        }
+
+        /* Instructor Card */
+        .instructor-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px solid var(--accent);
+            padding: 4px;
+            background: linear-gradient(145deg, #14141c 0%, #0f0f15 100%);
+        }
+
+        /* Strikethrough Animation */
+        .strike-through {
+            position: relative;
+        }
+
+        .strike-through::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 100%;
+            height: 2px;
+            background: #ef4444;
+            transform: rotate(-5deg);
+        }
+
+        /* Focus States */
+        a:focus-visible, button:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
+
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            .particle {
+                display: none;
+            }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .ladder-step {
+                padding-left: 2.5rem;
+            }
+            .ladder-step::before {
+                left: 0.6rem;
+            }
+
+            .btn-primary {
+                padding: 0.875rem 1.75rem;
+            }
+
+            .testimonial-card {
+                padding: 1.5rem;
+            }
+
+            .testimonial-card::before {
+                font-size: 4rem;
+            }
+
+            .faq-question {
+                padding: 1rem 1.25rem;
+            }
+
+            .pricing-card {
+                padding: 1.5rem !important;
+            }
+        }
+
+        /* Small phone fix — mencegah tampilan gepeng */
+        @media (max-width: 480px) {
+            body {
+                font-size: 15px;
+            }
+
+            .btn-primary {
+                padding: 0.875rem 1.25rem;
+                font-size: 0.95rem;
+                width: 100%;
+                justify-content: center;
+            }
+
+            .hero-mobile-image {
+                max-height: 260px;
+                overflow: hidden;
+            }
+
+            .hero-mobile-image img {
+                object-fit: cover;
+                height: 260px;
+            }
+
+            .testimonial-card {
+                padding: 1.25rem;
+            }
+
+            .testimonial-card::before {
+                font-size: 3rem;
+            }
+
+            .instructor-img {
+                width: 100px;
+                height: 100px;
+            }
+
+            .step-number {
+                width: 1.5rem;
+                height: 1.5rem;
+                font-size: 0.75rem;
+            }
+
+            .ladder-step {
+                padding-left: 2.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center overflow-hidden">
+        <div class="hero-bg"></div>
+        <div class="grid-pattern"></div>
+        
+        <!-- Floating Particles -->
+        <div class="particle" style="top: 20%; left: 10%;"></div>
+        <div class="particle" style="top: 40%; left: 80%; animation-delay: -3s;"></div>
+        <div class="particle" style="top: 60%; left: 25%; animation-delay: -7s;"></div>
+        <div class="particle" style="top: 80%; left: 70%; animation-delay: -5s;"></div>
+        <div class="particle" style="top: 30%; left: 60%; animation-delay: -10s;"></div>
+        
+        <div class="relative z-10 w-full max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-32">
+            <div class="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-20 items-center">
+                <!-- Hero Content -->
+                <div class="space-y-8">
+                    <div class="reveal">
+                        <span class="inline-block px-4 py-2 bg-midnight/50 border border-midnightLight rounded-full text-sm text-muted font-medium">
+                            Framework Strategi Komunikasi
+                        </span>
+                    </div>
+                    
+                    <h1 class="reveal reveal-delay-1 font-display text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">
+                        Ide Bagus Bukan Jaminan Sukses,
+                        <span class="text-accent">Tapi Berbicara ke Orang Tepat</span> Adalah
+                    </h1>
+                    
+                    <p class="reveal reveal-delay-2 text-lg sm:text-xl text-muted max-w-xl">
+                        Setiap hari, ribuan inovasi gagal bukan karena produknya buruk. Mereka gagal karena berbicara kepada orang yang salah, di waktu yang salah, dengan cara yang salah.
+                    </p>
+                    
+                    <p class="reveal reveal-delay-3 text-base text-subtle max-w-xl">
+                        Buku ini mengajarkan cara memetakan perjalanan audiens Anda—dari yang belum menyadari masalah, hingga siap mengambil keputusan.
+                    </p>
+                    
+                    <div class="reveal reveal-delay-4 flex flex-col sm:flex-row gap-4">
+                        <a href="#conversion-block" class="btn-primary text-lg">
+                            <span>Ambil Ebook Sekarang</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                        </a>
+                        <a href="#awareness-ladder" class="inline-flex items-center gap-2 text-muted hover:text-accent transition-colors px-4 py-3">
+                            <span>Pelajari Dulu</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7 15 5 5 5-5"/><path d="m7 9 5-5 5 5"/></svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Hero Image -->
+                <div class="reveal reveal-delay-2 relative">
+                    <div class="relative rounded-2xl overflow-hidden shadow-2xl hero-mobile-image">
+                        <img src="https://placehold.co/600x500/14141c/d4af37?text=The+Conversion+Climb" alt="The Conversion Climb Ebook Cover" class="w-full h-auto">
+                        <div class="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-transparent"></div>
+                    </div>
+                    <!-- Decorative Elements -->
+                    <div class="absolute -top-4 -right-4 w-24 h-24 bg-accent/10 rounded-full blur-2xl"></div>
+                    <div class="absolute -bottom-4 -left-4 w-32 h-32 bg-midnight/30 rounded-full blur-2xl"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Agitation Section -->
+    <section class="relative py-20 lg:py-32">
+        <div class="grid-pattern"></div>
+        <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="reveal text-center space-y-6">
+                <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold">
+                    Apakah Ini yang Anda Rasakan?
+                </h2>
+                <div class="w-20 h-1 bg-accent mx-auto rounded-full"></div>
+            </div>
+            
+            <div class="reveal reveal-delay-1 mt-12 space-y-6">
+                <div class="card-hover rounded-xl p-6 flex items-start gap-4">
+                    <div class="flex-shrink-0 w-12 h-12 bg-red-500/10 rounded-lg flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-lg mb-1">Pesan Tidak Sampai ke Target</h3>
+                        <p class="text-muted">Anda merasa punya produk bagus, tapi audiens tidak merespons seperti yang diharapkan.</p>
+                    </div>
+                </div>
+                
+                <div class="card-hover rounded-xl p-6 flex items-start gap-4">
+                    <div class="flex-shrink-0 w-12 h-12 bg-red-500/10 rounded-lg flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-lg mb-1">Bingung Mulai dari Mana</h3>
+                        <p class="text-muted">Ada terlalu banyak strategi marketing, tapi tidak tahu mana yang cocok untuk kondisi Anda.</p>
+                    </div>
+                </div>
+                
+                <div class="card-hover rounded-xl p-6 flex items-start gap-4">
+                    <div class="flex-shrink-0 w-12 h-12 bg-red-500/10 rounded-lg flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-lg mb-1">Komunikasi Tidak Tepat Sasaran</h3>
+                        <p class="text-muted">Anda berbicara sama kepada semua orang, padahal setiap orang berada di tahap kesadaran yang berbeda.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="reveal reveal-delay-2 mt-12 text-center">
+                <p class="text-xl text-muted">
+                    Jika satu saja di atas terasa familiar, maka Anda berada di tempat yang tepat.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Awareness Ladder Section -->
+    <section id="awareness-ladder" class="relative py-20 lg:py-32 bg-surfaceLight/30">
+        <div class="grid-pattern"></div>
+        <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="reveal text-center space-y-4 mb-16">
+                <span class="inline-block px-4 py-2 bg-accent/10 border border-accent/20 rounded-full text-sm text-accent font-medium">
+                    Inti dari Buku Ini
+                </span>
+                <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold">
+                    Awareness Ladder: 5 Tingkatan Kesadaran
+                </h2>
+                <p class="text-lg text-muted max-w-2xl mx-auto">
+                    Pahami di mana posisi audiens Anda, dan sesuaikan pesan Anda untuk masing-masing tahap.
+                </p>
+            </div>
+            
+            <div class="reveal reveal-delay-1 space-y-8">
+                <!-- Step 1 -->
+                <div class="ladder-step">
+                    <div class="step-number">1</div>
+                    <div class="card-hover rounded-xl p-6">
+                        <h3 class="font-display text-xl font-semibold text-accent mb-2">Unaware</h3>
+                        <p class="text-muted mb-3">Mereka tidak menyadari punya masalah. Bahkan tidak tahu solusi seperti Anda ada.</p>
+                        <p class="text-subtle text-sm">Strategi: Edukasi, bukan jualan. Tunjukkan bahwa masalah ada dan perlu diatasi.</p>
+                    </div>
+                </div>
+                
+                <!-- Step 2 -->
+                <div class="ladder-step">
+                    <div class="step-number">2</div>
+                    <div class="card-hover rounded-xl p-6">
+                        <h3 class="font-display text-xl font-semibold text-accent mb-2">Problem Aware</h3>
+                        <p class="text-muted mb-3">Mereka tahu ada masalah, tapi belum tahu solusinya. Masih mencari informasi.</p>
+                        <p class="text-subtle text-sm">Strategi: Tunjukkan berbagai solusi yang tersedia, termasuk yang Anda tawarkan.</p>
+                    </div>
+                </div>
+                
+                <!-- Step 3 -->
+                <div class="ladder-step">
+                    <div class="step-number">3</div>
+                    <div class="card-hover rounded-xl p-6">
+                        <h3 class="font-display text-xl font-semibold text-accent mb-2">Solution Aware</h3>
+                        <p class="text-muted mb-3">Mereka tahu solusi ada, tapi masih membandingkan opsi. belum yakin pilih yang mana.</p>
+                        <p class="text-subtle text-sm">Strategi: Bedakan diri dari kompetitor. Tunjukkan keunggulan unik Anda.</p>
+                    </div>
+                </div>
+                
+                <!-- Step 4 -->
+                <div class="ladder-step">
+                    <div class="step-number">4</div>
+                    <div class="card-hover rounded-xl p-6">
+                        <h3 class="font-display text-xl font-semibold text-accent mb-2">Product Aware</h3>
+                        <p class="text-muted mb-3">Mereka tahu tentang produk Anda, tapi butuh alasan untuk memilih Anda sekarang.</p>
+                        <p class="text-subtle text-sm">Strategi: Berikan bukti, testimoni, dan dorongan untuk mengambil keputusan.</p>
+                    </div>
+                </div>
+                
+                <!-- Step 5 -->
+                <div class="ladder-step">
+                    <div class="step-number">5</div>
+                    <div class="card-hover rounded-xl p-6">
+                        <h3 class="font-display text-xl font-semibold text-accent mb-2">Most Aware</h3>
+                        <p class="text-muted mb-3">Mereka siap membeli. Tinggal butuh sedikit dorongan atau penawaran yang tepat.</p>
+                        <p class="text-subtle text-sm">Strategi: Permudah proses pembelian. Berikan CTA yang jelas dan langsung.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Objection Handling Section -->
+    <section class="relative py-20 lg:py-32">
+        <div class="grid-pattern"></div>
+        <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="reveal text-center space-y-4 mb-16">
+                <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold">
+                    Tapi... Apakah Tidak Ribet?
+                </h2>
+                <p class="text-lg text-muted">
+                    Kami paham keraguan Anda. Mari kita jawab langsung.
+                </p>
+            </div>
+            
+            <div class="reveal reveal-delay-1 grid sm:grid-cols-2 gap-6">
+                <div class="card-hover rounded-xl p-6">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 bg-accent/10 rounded-lg flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#d4af37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+                        </div>
+                        <h3 class="font-semibold">Bahasanya Sederhana</h3>
+                    </div>
+                    <p class="text-muted text-sm">Tidak ada jargon marketing yang membingungkan. Setiap konsep dijelaskan dengan contoh nyata yang mudah dipahami.</p>
+                </div>
+                
+                <div class="card-hover rounded-xl p-6">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 bg-accent/10 rounded-lg flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#d4af37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
+                        </div>
+                        <h3 class="font-semibold">Praktis Langsung Pakai</h3>
+                    </div>
+                    <p class="text-muted text-sm">Setiap bab dilengkapi dengan template dan checklist yang bisa Anda terapkan langsung ke bisnis Anda.</p>
+                </div>
+                
+                <div class="card-hover rounded-xl p-6">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 bg-accent/10 rounded-lg flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#d4af37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                        </div>
+                        <h3 class="font-semibold">Bisa Dibaca 1-2 Jam</h3>
+                    </div>
+                    <p class="text-muted text-sm">Format ebook yang ringkas namun padat. Tidak perlu berhari-hari untuk memahami inti dari framework ini.</p>
+                </div>
+                
+                <div class="card-hover rounded-xl p-6">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 bg-accent/10 rounded-lg flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#d4af37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
+                        </div>
+                        <h3 class="font-semibold">Untuk Semua Industri</h3>
+                    </div>
+                    <p class="text-muted text-sm">Prinsipnya universal. Entah Anda jualan produk fisik, jasa, atau digital—framework ini bisa diterapkan.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof Section -->
+    <section class="relative py-20 lg:py-32 bg-surfaceLight/30">
+        <div class="grid-pattern"></div>
+        <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="reveal text-center space-y-4 mb-16">
+                <span class="inline-block px-4 py-2 bg-accent/10 border border-accent/20 rounded-full text-sm text-accent font-medium">
+                    Testimoni Pembaca
+                </span>
+                <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold">
+                    Apa Kata Mereka?
+                </h2>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="reveal reveal-delay-1 testimonial-card">
+                    <p class="text-muted mb-6 relative z-10">
+                        "Saya sudah baca banyak buku marketing, tapi baru kali ini merasa 'oh, ternyata selama ini saya salah sasaran'. Framework awareness laddernya sangat membantu."
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 rounded-full bg-midnight/50 overflow-hidden">
+                            <img src="https://placehold.co/100/191970/ffffff?text=AS" alt="Avatar" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <p class="font-semibold text-sm">Andi Saputra</p>
+                            <p class="text-subtle text-xs">Owner UMKM Kuliner</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="reveal reveal-delay-2 testimonial-card">
+                    <p class="text-muted mb-6 relative z-10">
+                        "Gak nyangka konsep sesederhana ini bisa berdampak besar. Sekarang tiap mau launch campaign, saya selalu cek dulu audiens ada di tahap mana."
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 rounded-full bg-midnight/50 overflow-hidden">
+                            <img src="https://placehold.co/100/191970/ffffff?text=DR" alt="Avatar" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <p class="font-semibold text-sm">Diana Rahmawati</p>
+                            <p class="text-subtle text-xs">Digital Marketer</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="reveal reveal-delay-3 testimonial-card">
+                    <p class="text-muted mb-6 relative z-10">
+                        "Bahasa yang digunakan benar-benar mudah dipahami. Saya yang awam marketing pun bisa langsung praktek. Worth it banget."
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 rounded-full bg-midnight/50 overflow-hidden">
+                            <img src="https://placehold.co/100/191970/ffffff?text=BP" alt="Avatar" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <p class="font-semibold text-sm">Budi Prasetyo</p>
+                            <p class="text-subtle text-xs">Freelancer</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Stats -->
+            <div class="reveal reveal-delay-4 mt-16 grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="text-center">
+                    <p class="font-display text-3xl sm:text-4xl font-bold text-accent">500+</p>
+                    <p class="text-muted text-sm">Pembaca</p>
+                </div>
+                <div class="text-center">
+                    <p class="font-display text-3xl sm:text-4xl font-bold text-accent">4.8</p>
+                    <p class="text-muted text-sm">Rating Rata-rata</p>
+                </div>
+                <div class="text-center">
+                    <p class="font-display text-3xl sm:text-4xl font-bold text-accent">15+</p>
+                    <p class="text-muted text-sm">Industri Berbeda</p>
+                </div>
+                <div class="text-center">
+                    <p class="font-display text-3xl sm:text-4xl font-bold text-accent">98%</p>
+                    <p class="text-muted text-sm">Tingkat Kepuasan</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Instructor Section -->
+    <section class="relative py-20 lg:py-32">
+        <div class="grid-pattern"></div>
+        <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="reveal text-center space-y-4 mb-12">
+                <span class="inline-block px-4 py-2 bg-accent/10 border border-accent/20 rounded-full text-sm text-accent font-medium">
+                    Penulis
+                </span>
+                <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold">
+                    Siapa di Balik Buku Ini?
+                </h2>
+            </div>
+            
+            <div class="reveal reveal-delay-1 flex flex-col md:flex-row items-center gap-8 text-center md:text-left">
+                <div class="flex-shrink-0">
+                    <div class="instructor-img">
+                        <img src="https://placehold.co/200/14141c/d4af37?text=Author" alt="Author Photo" class="w-full h-full rounded-full object-cover">
+                    </div>
+                </div>
+                <div class="space-y-4">
+                    <h3 class="font-display text-2xl font-semibold">Rizky Pratama</h3>
+                    <p class="text-accent font-medium">Conversion Strategist & Marketing Educator</p>
+                    <p class="text-muted">
+                        Lebih dari 8 tahun berkecimpung di dunia digital marketing, Rizky telah membantu puluhan brand dari berbagai industri meningkatkan konversi mereka. Dengan pengalaman praktis dan pendekatan berbasis data, ia menuangkan seluruh pengetahuannya dalam framework yang mudah dipahami.
+                    </p>
+                    <div class="flex items-center justify-center md:justify-start gap-4 pt-2">
+                        <span class="text-subtle text-sm">Pernah bekerja dengan:</span>
+                        <div class="flex gap-2">
+                            <span class="px-3 py-1 bg-surfaceLight rounded text-xs text-muted">Tokopedia</span>
+                            <span class="px-3 py-1 bg-surfaceLight rounded text-xs text-muted">Gojek</span>
+                            <span class="px-3 py-1 bg-surfaceLight rounded text-xs text-muted">Traveloka</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="relative py-20 lg:py-32 bg-surfaceLight/30">
+        <div class="grid-pattern"></div>
+        <div class="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="reveal text-center space-y-4 mb-12">
+                <span class="inline-block px-4 py-2 bg-accent/10 border border-accent/20 rounded-full text-sm text-accent font-medium">
+                    FAQ
+                </span>
+                <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold">
+                    Pertanyaan yang Sering Ditanyakan
+                </h2>
+            </div>
+            
+            <div class="reveal reveal-delay-1 space-y-4" id="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span class="font-medium">Apakah ini cocok untuk pemula yang baru mulai bisnis?</span>
+                        <svg class="faq-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="p-5 text-muted">
+                            Sangat cocok! Justru pemula butuh fondasi yang kuat tentang cara berkomunikasi dengan audiens. Buku ini ditulis dengan bahasa yang mudah dipahami tanpa perlu background marketing sebelumnya.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span class="font-medium">Format apa yang akan saya dapatkan?</span>
+                        <svg class="faq-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="p-5 text-muted">
+                            Anda akan mendapatkan ebook dalam format PDF yang bisa dibaca di perangkat apapun—HP, tablet, atau laptop. File akan dikirim langsung ke email Anda setelah pembayaran dikonfirmasi.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span class="font-medium">Apakah ada garansi jika tidak puas?</span>
+                        <svg class="faq-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="p-5 text-muted">
+                            Kami menyediakan garansi 7 hari. Jika setelah membaca Anda merasa tidak mendapat nilai tambah, cukup hubungi kami dan kami akan memproses pengembalian dana tanpa pertanyaan rumit.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span class="font-medium">Berapa lama waktu yang dibutuhkan untuk membaca?</span>
+                        <svg class="faq-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="p-5 text-muted">
+                            Rata-rata pembaca menyelesaikan dalam 1-2 jam. Kami sengaja merancangnya ringkas namun padat, sehingga Anda bisa langsung praktek tanpa perlu berhari-hari membaca teori.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span class="font-medium">Apakah bisa dikonsultasikan jika ada yang tidak dipahami?</span>
+                        <svg class="faq-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="p-5 text-muted">
+                            Tentu! Setiap pembeli mendapat akses ke grup komunitas eksklusif di mana Anda bisa bertanya, berdiskusi, dan berbagi pengalaman dengan pembaca lain serta tim kami.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="conversion-block" class="relative py-20 lg:py-32">
+        <div class="grid-pattern"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-accent/5 rounded-full blur-3xl"></div>
+        
+        <div class="relative z-10 max-w-lg mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="reveal text-center space-y-4 mb-12">
+                <span class="inline-block px-4 py-2 bg-accent/10 border border-accent/20 rounded-full text-sm text-accent font-medium">
+                    Penawaran Spesial
+                </span>
+                <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold">
+                    Investasi untuk Bisnis Anda
+                </h2>
+            </div>
+            
+            <div class="reveal reveal-delay-1 pricing-card glow-accent p-8">
+                <!-- Price Header -->
+                <div class="text-center mb-8">
+                    <p class="text-muted mb-2">Harga Normal</p>
+                    <p class="strike-through text-2xl text-subtle font-semibold inline-block">Rp 70.000</p>
+                    
+                    <div class="mt-4">
+                        <p class="text-muted text-sm">Harga Hari Ini</p>
+                        <div class="flex items-baseline justify-center gap-2">
+                            <span class="font-display text-4xl sm:text-5xl font-bold text-accent">Rp 50.000</span>
+                        </div>
+                    </div>
+                    
+                    <p class="mt-3 text-sm text-green-400">
+                        Hemat Rp 20.000
+                    </p>
+                </div>
+                
+                <!-- What's Included -->
+                <div class="space-y-4 mb-8">
+                    <p class="font-semibold text-center mb-4">Yang Anda Dapatkan:</p>
+                    
+                    <div class="flex items-start gap-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-0.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+                        <span class="text-muted">Ebook lengkap "The Conversion Climb" (PDF)</span>
+                    </div>
+                    
+                    <div class="flex items-start gap-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-0.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+                        <span class="text-muted">Template Awareness Ladder yang siap pakai</span>
+                    </div>
+                    
+                    <div class="flex items-start gap-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-0.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+                        <span class="text-muted">Checklist penerapan untuk setiap tahap</span>
+                    </div>
+                    
+                    <div class="flex items-start gap-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-0.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+                        <span class="text-muted">Akses grup komunitas eksklusif</span>
+                    </div>
+                    
+                    <div class="flex items-start gap-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-0.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+                        <span class="text-muted">Update konten gratis selamanya</span>
+                    </div>
+                </div>
+                
+                <!-- CTA Button -->
+                <a href="#form-section" class="btn-primary w-full justify-center text-lg mb-4">
+                    <span>Beli Sekarang</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </a>
+                
+                <!-- Trust Micro-copy -->
+                <div class="text-center space-y-2">
+                    <div class="flex items-center justify-center gap-2 text-subtle text-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                        <span>Pembayaran aman & terenkripsi</span>
+                    </div>
+                    <div class="flex items-center justify-center gap-2 text-subtle text-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><path d="m9 12 2 2 4-4"/></svg>
+                        <span>Garansi 7 hari uang kembali</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Form Section -->
+    <section id="form-section" class="relative py-20 lg:py-32 bg-surfaceLight/30">
+        <div class="grid-pattern"></div>
+        <div class="relative z-10 max-w-xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="reveal text-center space-y-4 mb-12">
+                <h2 class="font-display text-3xl sm:text-4xl font-bold">
+                    Lengkapi Data Anda
+                </h2>
+                <p class="text-muted">
+                    Isi form di bawah untuk menyelesaikan pembelian
+                </p>
+            </div>
+            
+            <div class="reveal reveal-delay-1 card-hover rounded-2xl p-8">
+                <form class="space-y-6" onsubmit="handleSubmit(event)">
+                    <div>
+                        <label for="name" class="block text-sm font-medium mb-2">Nama Lengkap</label>
+                        <input type="text" id="name" name="name" required
+                            class="w-full px-4 py-3 bg-surface border border-border rounded-lg focus:outline-none focus:border-accent transition-colors"
+                            placeholder="Masukkan nama lengkap">
+                    </div>
+                    
+                    <div>
+                        <label for="email" class="block text-sm font-medium mb-2">Email</label>
+                        <input type="email" id="email" name="email" required
+                            class="w-full px-4 py-3 bg-surface border border-border rounded-lg focus:outline-none focus:border-accent transition-colors"
+                            placeholder="email@contoh.com">
+                    </div>
+                    
+                    <div>
+                        <label for="whatsapp" class="block text-sm font-medium mb-2">Nomor WhatsApp</label>
+                        <input type="tel" id="whatsapp" name="whatsapp" required
+                            class="w-full px-4 py-3 bg-surface border border-border rounded-lg focus:outline-none focus:border-accent transition-colors"
+                            placeholder="08xxxxxxxxxx">
+                    </div>
+                    
+                    <button type="submit" class="btn-primary w-full justify-center text-lg">
+                        <span>Lanjut ke Pembayaran</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                    </button>
+                </form>
+                
+                <p class="text-center text-subtle text-xs mt-6">
+                    Dengan melanjutkan, Anda menyetujui <a href="#" class="text-accent hover:underline">Syarat & Ketentuan</a> kami.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="relative py-12 border-t border-border">
+        <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="text-center md:text-left">
+                    <p class="font-display text-xl font-semibold text-accent">The Conversion Climb</p>
+                    <p class="text-subtle text-sm mt-1">Kuasai Awareness Ladder, Tingkatkan Konversi</p>
+                </div>
+                
+                <div class="flex items-center gap-6 text-subtle text-sm">
+                    <a href="#" class="hover:text-accent transition-colors">Kebijakan Privasi</a>
+                    <a href="#" class="hover:text-accent transition-colors">Syarat & Ketentuan</a>
+                    <a href="#" class="hover:text-accent transition-colors">Kontak</a>
+                </div>
+            </div>
+            
+            <div class="text-center text-subtle text-xs mt-8 pt-8 border-t border-border">
+                <p>2024 The Conversion Climb. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize variables first
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        // Scroll Reveal with IntersectionObserver
+        function initScrollReveal() {
+            const reveals = document.querySelectorAll('.reveal');
+            
+            if (prefersReducedMotion) {
+                reveals.forEach(el => el.classList.add('active'));
+                return;
+            }
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+            
+            reveals.forEach(el => observer.observe(el));
+        }
+
+        // FAQ Toggle
+        function toggleFaq(element) {
+            const answer = element.nextElementSibling;
+            const icon = element.querySelector('.faq-icon');
+            
+            answer.classList.toggle('active');
+            icon.classList.toggle('rotate');
+        }
+
+        // Form Submit Handler
+        function handleSubmit(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const whatsapp = document.getElementById('whatsapp').value;
+            
+            // Show success message
+            alert(`Terima kasih ${name}! Data Anda telah diterima. Kami akan menghubungi Anda melalui WhatsApp untuk proses pembayaran.`);
+            
+            // Reset form
+            event.target.reset();
+        }
+
+        // Smooth Scroll for Anchor Links
+        function initSmoothScroll() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const target = document.querySelector(targetId);
+                    if (target) {
+                        e.preventDefault();
+                        target.scrollIntoView({
+                            behavior: prefersReducedMotion ? 'auto' : 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        }
+
+        // Floating Particles Animation Enhancement
+        function initParticles() {
+            if (prefersReducedMotion) return;
+            
+            const particles = document.querySelectorAll('.particle');
+            particles.forEach((particle, index) => {
+                particle.style.animationDelay = `${index * -3}s`;
+            });
+        }
+
+        // Initialize all functions when DOM is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            initScrollReveal();
+            initSmoothScroll();
+            initParticles();
+        });
+    </script>
+</body>
+</html>
